@@ -1,13 +1,13 @@
-import { useState } from 'react'
 //* Es como un context api, para que toda la aplicacion pueda usar las caracteristicas de apollo
 import { ApolloProvider } from "@apollo/client";
-import  client  from './config/apollo';
+import { useEffect, useMemo, useState } from 'react';
 import { ToastContainer } from "react-toastify";
-import { useEffect, useMemo } from "react";
-import Auth from './pages/Auth';
-import { getToken, setToken } from "./utils/token";
+import client from './config/apollo';
 import AuthContext from "./context/AuthContext";
-import Home from "./pages/Home";
+import Auth from './pages/Auth';
+import Navigation from "./routes/Navigation";
+import { decodeToken, getToken } from "./utils/token";
+
 
 export default function App() {
   const [auth, setAuth] = useState( undefined );
@@ -17,7 +17,7 @@ export default function App() {
     if(!token){
       setAuth(null);
     }else{
-      setAuth(token);
+      setAuth(decodeToken(token));
     }
     
   }, []);
@@ -38,10 +38,13 @@ export default function App() {
   }),
    [auth]);
    
+
+   if(auth === undefined) return null;
+
   return (
     <ApolloProvider client={ client }>
       <AuthContext.Provider value={ authData }>
-      {  !auth ? <Auth/>: <Home /> }
+      {  !auth ? <Auth/>: <Navigation /> }
 
       <ToastContainer 
       position="top-right"
