@@ -35,3 +35,18 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const UPDATE_AVATAR = gql`
+  mutation updateAvatar($file: Upload) {
+    updateAvatar(file: $file) {
+      status
+      urlAvatar
+    }
+  }
+`;
+
+export const DELETE_AVATAR = gql`
+  mutation deleteAvatar {
+    deleteAvatar
+  }
+`;
