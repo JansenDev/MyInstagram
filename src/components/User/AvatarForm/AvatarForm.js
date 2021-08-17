@@ -59,14 +59,14 @@ export default function AvatarForm(props) {
     update(cache) {
       //*Obtener los datos de la caché
       const { getUser } = cache.readQuery({
-        query: GET_USER,//*gql que queremos leer
+        query: GET_USER, //*gql que queremos leer
         variables: {
           username: auth.username,
         },
       });
       //*Actualizar la caché
       cache.writeQuery({
-        query: GET_USER,//*gql que queremos leer para sobreescribir
+        query: GET_USER, //*gql que queremos leer para sobreescribir
         variables: { variables: auth.username },
         data: {
           getUser: { ...getUser, avatar: "" },

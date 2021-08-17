@@ -10,6 +10,8 @@ import ImageNotFound from "../../../assets/avatar.png";
 import UserNotFound from "../../UserNotFound";
 import ModalBasic from "../../Modal/ModalBasic";
 import AvatarForm from "../AvatarForm/AvatarForm";
+import HeaderProfile from "./HeaderProfile";
+import SettingsForms from "../SettingsForm";
 
 export default function Profile(props) {
   const { username } = props;
@@ -35,10 +37,21 @@ export default function Profile(props) {
     switch (type) {
       case "avatar":
         setTitleModal("Cambiar foto de perfil");
-        setChildrenModal(<AvatarForm setShowModal={setShowModal} auth={auth} />);
+        setChildrenModal(
+          <AvatarForm setShowModal={setShowModal} auth={auth} />
+        );
         setShowModal(true);
         break;
-
+      case "settings":
+        setTitleModal("");
+        setChildrenModal(
+          <SettingsForms
+            setShowModal={setShowModal}
+            setTitleModal={setTitleModal}
+            setChildrenModal={setChildrenModal}
+          />
+        );
+        setShowModal(true);
       default:
         break;
     }
@@ -49,7 +62,7 @@ export default function Profile(props) {
       <Grid className="profile">
         <Grid.Column width={5} className="profile__left">
           <Image
-            src={ getUser.avatar? getUser.avatar :ImageNotFound}
+            src={getUser.avatar ? getUser.avatar : ImageNotFound}
             avatar
             onClick={() =>
               getUser.username === auth.username && handlerModal("avatar")
@@ -58,7 +71,12 @@ export default function Profile(props) {
         </Grid.Column>
 
         <Grid.Column width={11} className="profile__right">
-          <div>HEADERPROFILE </div>
+          {/* TODO: header Profile */}
+          <HeaderProfile
+            getUser={getUser}
+            auth={auth}
+            handlerModal={handlerModal}
+          />
           <div>Followers</div>
           <div className="other">
             <p className="name">{getUser.name}</p>
