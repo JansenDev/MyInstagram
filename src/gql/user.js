@@ -53,11 +53,21 @@ export const DELETE_AVATAR = gql`
 
 export const UPDATE_USER = gql`
   mutation UserUpdate($input: UserUpdateInput) {
-    updateUser(input:$input){
-    status
-    email
-    siteweb
-    description
+    updateUser(input: $input) {
+      status
+      email
+      siteweb
+      description
+    }
   }
+`;
+
+export const SEARCH_USERS = gql`
+  query searchUsers($search: String) {
+    searchUsers(search: $search) {
+      name
+      username
+      avatar
+    }
   }
 `;

@@ -6,6 +6,7 @@ import { Container, Grid, Image } from "semantic-ui-react";
 import logo from "../../assets/instagram.png";
 import RightHeader from "./RightHeader";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar/SearchBar";
 
 export default function Header() {
   return (
@@ -18,7 +19,9 @@ export default function Header() {
             </Link>
           </Grid.Column>
 
-          <Grid.Column width={10}></Grid.Column>
+          <Grid.Column width={10}>
+            <SearchBar />
+          </Grid.Column>
 
           <Grid.Column width={3}>
             <RightHeader />
