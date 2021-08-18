@@ -6,6 +6,7 @@ import "./SettingsForm.scss";
 import PasswordForm from "../PasswordForm";
 import useAuth from "../../../hooks/useAuth";
 import EmailForm from "../EmailForm";
+import DescriptionForm from "../DescriptionForm";
 
 function SettingsForms(props) {
   const { setShowModal, setTitleModal, setChildrenModal, getUser } = props;
@@ -28,14 +29,25 @@ function SettingsForms(props) {
   const changeEmail = () => {
     setTitleModal("Change Email");
     setChildrenModal(
-      <EmailForm setShowModal={setShowModal} onlogout={onlogout}  getUser={getUser}/>
+      <EmailForm
+        setShowModal={setShowModal}
+        onlogout={onlogout}
+        getUser={getUser}
+      />
+    );
+  };
+
+  const changeDescription = () => {
+    setTitleModal("Change Description");
+    setChildrenModal(
+      <DescriptionForm setShowModal={setShowModal} getUser={getUser} />
     );
   };
   return (
     <div className="settings-form">
       <Button onClick={changePassword}>Cambiar Contraseña</Button>
       <Button onClick={changeEmail}>Cambiar email</Button>
-      <Button>Descripcion</Button>
+      <Button onClick={changeDescription}>Descripcion</Button>
       <Button>Sitio Web</Button>
       <Button onClick={onlogout}>Cerrar Sesion</Button>
       <Button onClick={() => setShowModal(false)}>Cancelar</Button>

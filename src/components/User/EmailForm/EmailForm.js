@@ -52,13 +52,13 @@ function EmailForm(props) {
         });
 
         if (!isEmailChanged.data.updateUser.status) {
-          toast.error("Error to the change email");
+          toast.error("Error changing email");
         } else {
           setShowModal(false);
           toast.success("Email changed successfull.");
         }
       } catch (error) {
-        toast.error("Error to the change email");
+        toast.error("Error changing email");
       }
     },
   });

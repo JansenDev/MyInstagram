@@ -57,7 +57,7 @@ export const UPDATE_USER = gql`
     status
     email
     webSite
-    descripcion
+    description
   }
   }
 `;
