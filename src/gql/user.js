@@ -56,7 +56,7 @@ export const UPDATE_USER = gql`
     updateUser(input:$input){
     status
     email
-    webSite
+    siteweb
     description
   }
   }

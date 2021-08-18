@@ -1,17 +1,17 @@
 import React from "react";
+import "./WebSiteForm.scss";
 import { Form, Button } from "semantic-ui-react";
-import "./DescriptionForm.scss";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useMutation } from "@apollo/client";
 import { GET_USER, UPDATE_USER } from "../../../gql/user";
 import { toast } from "react-toastify";
 
-function DescriptionForm(props) {
-  const { getUser, setShowModal } = props;
+function WebSiteForm(props) {
+  const { setShowModal, getUser } = props;
   const [updateUser] = useMutation(UPDATE_USER, {
-    update(cacheMemory, updateUserResult) {
-      cacheMemory.writeQuery({
+    update(cachememory, updateUserResult) {
+      cachememory.writeQuery({
         query: GET_USER,
         variables: {
           username: getUser.username,
@@ -19,49 +19,46 @@ function DescriptionForm(props) {
         data: {
           getUser: {
             ...getUser,
-            description: updateUserResult.data.updateUser.description,
+            siteweb: updateUserResult.data.updateUser.siteweb,
           },
         },
       });
     },
   });
-
   const formik = useFormik({
-    initialValues: {
-      description: getUser.description,
-    },
+    initialValues: { siteweb: getUser.siteweb },
     validationSchema: Yup.object({
-      description: Yup.string().max(500),
+      siteweb: Yup.string().max(80),
     }),
     onSubmit: async (formValues) => {
       try {
-        const isDescriptionChanged = await updateUser({
+        const iswebSiteChanged = await updateUser({
           variables: {
             input: {
-              description: formValues.description,
+              siteweb: formValues.siteweb,
             },
           },
         });
-
-        if (!isDescriptionChanged.data.updateUser.status) {
-          toast.error("error changing description");
-          throw new Error("error changing description");
+        if (!iswebSiteChanged.data.updateUser.siteweb) {
+          toast.error("Error changing web siteweb");
+          throw new Error("Error changing siteweb");
         } else {
-          toast.success("Description Changed");
+          toast.success("web site Changed");
           setShowModal(false);
         }
       } catch (error) {
-        toast.error("Error changing description");
+        toast.error("Error changing web site");
       }
     },
   });
   return (
-    <Form className="description-form" onSubmit={formik.handleSubmit}>
-      <Form.TextArea
-        value={formik.values.description}
-        name="description"
+    <Form className="webSite-form" onSubmit={formik.handleSubmit}>
+      <Form.Input
+        placeholder="My web site"
+        value={formik.values.siteweb}
+        name="siteweb"
         onChange={formik.handleChange}
-        error={formik.errors.description && true}
+        error={formik.errors.siteweb && true}
       />
       <Button type="submit" className="btn-submit">
         Actualizar
@@ -70,4 +67,4 @@ function DescriptionForm(props) {
   );
 }
 
-export default DescriptionForm;
+export default WebSiteForm;
