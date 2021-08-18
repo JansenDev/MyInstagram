@@ -8,8 +8,8 @@ import { UPDATE_USER } from "../../../gql/user";
 import { toast } from "react-toastify";
 
 function PasswordForm(props) {
-  const {onlogout, setShowModal} = props;
-  const [ updateUser ] = useMutation(UPDATE_USER);
+  const { onlogout, setShowModal } = props;
+  const [updateUser] = useMutation(UPDATE_USER);
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object({
@@ -23,7 +23,6 @@ function PasswordForm(props) {
     }),
     onSubmit: async (formValues) => {
       try {
-        console.log(formValues);
         const isPasswordChanged = await updateUser({
           variables: {
             input: {
@@ -33,9 +32,9 @@ function PasswordForm(props) {
           },
         });
 
-        if(!isPasswordChanged.data.updateUser){
+        if (!isPasswordChanged.data.updateUser.status) {
           toast.error("Error to the change password");
-        }else{
+        } else {
           // onlogout();
           setShowModal(false);
           toast.success("Password Changed");

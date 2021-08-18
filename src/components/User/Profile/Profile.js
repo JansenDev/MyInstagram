@@ -11,7 +11,7 @@ import UserNotFound from "../../UserNotFound";
 import ModalBasic from "../../Modal/ModalBasic";
 import AvatarForm from "../AvatarForm/AvatarForm";
 import HeaderProfile from "./HeaderProfile";
-import SettingsForms from "../SettingsForm";
+import SettingsForm from "../SettingsForm";
 
 export default function Profile(props) {
   const { username } = props;
@@ -20,13 +20,13 @@ export default function Profile(props) {
   const [titleModal, setTitleModal] = useState("");
   const [childrenModal, setChildrenModal] = useState(null);
 
-  const result = useQuery(GET_USER, {
+  const userDataFetch = useQuery(GET_USER, {
     variables: {
       username,
     },
   });
 
-  const { data, loading, error } = result;
+  const { data, loading, error } = userDataFetch;
   const { auth } = useAuth();
   // Validaciones
   if (loading) return null;
@@ -45,10 +45,11 @@ export default function Profile(props) {
       case "settings":
         setTitleModal("");
         setChildrenModal(
-          <SettingsForms
+          <SettingsForm
             setShowModal={setShowModal}
             setTitleModal={setTitleModal}
             setChildrenModal={setChildrenModal}
+            getUser={getUser}
           />
         );
         setShowModal(true);
@@ -71,7 +72,6 @@ export default function Profile(props) {
         </Grid.Column>
 
         <Grid.Column width={11} className="profile__right">
-          {/* TODO: header Profile */}
           <HeaderProfile
             getUser={getUser}
             auth={auth}

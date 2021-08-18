@@ -5,11 +5,11 @@ import { useApolloClient } from "@apollo/client";
 import "./SettingsForm.scss";
 import PasswordForm from "../PasswordForm";
 import useAuth from "../../../hooks/useAuth";
+import EmailForm from "../EmailForm";
 
 function SettingsForms(props) {
-  const { setShowModal, setTitleModal, setChildrenModal } = props;
+  const { setShowModal, setTitleModal, setChildrenModal, getUser } = props;
   const { logout } = useAuth();
-
   const history = useHistory();
   const aClient = useApolloClient();
 
@@ -24,16 +24,23 @@ function SettingsForms(props) {
       <PasswordForm onlogout={onlogout} setShowModal={setShowModal} />
     );
   };
+
+  const changeEmail = () => {
+    setTitleModal("Change Email");
+    setChildrenModal(
+      <EmailForm setShowModal={setShowModal} onlogout={onlogout}  getUser={getUser}/>
+    );
+  };
   return (
     <div className="settings-form">
-      <Button onClick={() => changePassword()}>Cambiar Contraseña</Button>
-      <Button>Cambiar email</Button>
+      <Button onClick={changePassword}>Cambiar Contraseña</Button>
+      <Button onClick={changeEmail}>Cambiar email</Button>
       <Button>Descripcion</Button>
       <Button>Sitio Web</Button>
-      <Button onClick={() => onlogout()}>Cerrar Sesion</Button>
+      <Button onClick={onlogout}>Cerrar Sesion</Button>
       <Button onClick={() => setShowModal(false)}>Cancelar</Button>
     </div>
   );
 }
- 
+
 export default SettingsForms;
