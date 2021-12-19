@@ -29,7 +29,6 @@ function SearchBar() {
         });
       });
       setResults(users);
-      //   console.log(results);
     } else {
       setResults([]);
     }

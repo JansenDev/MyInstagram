@@ -11,7 +11,6 @@ function RegisterForm(props) {
     const  {setShowLogin}  = props;
 
     const [ register ] = useMutation(REGISTER);
-    console.log(register)
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -42,7 +41,7 @@ function RegisterForm(props) {
 
                 const result = await register({
                     variables:{
-                        input: newUser 
+                        input: newUser
                     }
                 });
                 toast.success("Usuario registrado correctamente");
@@ -106,7 +105,7 @@ function initialValues(){
         email:"",
         password:"",
         repeatPassword:"",
-    }    
+    }
 }
 
 export default RegisterForm;

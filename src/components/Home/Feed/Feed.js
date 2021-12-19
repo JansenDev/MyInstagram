@@ -1,11 +1,11 @@
 import "./Feed.scss";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { map } from "lodash";
+import { map, size } from "lodash";
 import { Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { Link, useHistory } from "react-router-dom";
+import { useQuery, useApolloClient } from "@apollo/client";
 import { GET_POST_OF_FOLLOWEDS } from "../../../gql/post";
 
 import ImageNotFound from "../../../assets/avatar.png";
@@ -13,13 +13,34 @@ import Action from "../../Modal/ModalPublication/Action";
 import CommentFrm from "../../Modal/ModalPublication/CommentFrm";
 import ModalPublication from "../../Modal/ModalPublication";
 
+import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
+
 function Feed() {
-  const { data, loading } = useQuery(GET_POST_OF_FOLLOWEDS);
+  const { data, loading, startPolling, stopPolling, error } = useQuery(
+    GET_POST_OF_FOLLOWEDS
+  );
   const [show, setShow] = useState(false);
   const [publication, setPublication] = useState(null);
 
+  const { logout } = useAuth();
+  const aClient = useApolloClient();
+  const history = useHistory();
+
+  useEffect(() => {
+    startPolling(3000);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
+
   if (loading) return null;
-  const { getPostsFolloweds: postsFollowedsList } = data;
+  if (error) {
+    toast.warning("Sesion Expirada.");
+    aClient.clearStore();
+    logout();
+    history.push("/");
+  }
+
+  const { getPostsFolloweds } = data || [];
   const onPublication = (post) => {
     setPublication(post);
     setShow(true);
@@ -27,7 +48,7 @@ function Feed() {
   return (
     <>
       <div className="feed">
-        {map(postsFollowedsList, (post, index) => (
+        {map(getPostsFolloweds, (post, index) => (
           <div key={index} className="feed__box">
             <Link key={index} to={`/${post.idUser.username}`}>
               <div className="feed__box-user">
@@ -42,7 +63,7 @@ function Feed() {
             <div
               className="feed__box-photo"
               style={{ backgroundImage: `url("${post.file}")` }}
-              onClick={()=>onPublication(post)}
+              onClick={() => onPublication(post)}
             ></div>
             <div className="feed__box-action">
               <Action publicationId={post.id} style="position:relative" />

@@ -27,13 +27,11 @@ export default function AvatarForm(props) {
     },
   });
   const [loading, setLoading] = useState(false);
-  // console.log( useMutation(UPDATE_AVATAR));
   const onDrop = useCallback(async (acceptedFiles) => {
-    // console.log(acceptedFiles);
+
     const file = acceptedFiles[0];
 
     try {
-      // console.log(file);
       setLoading(true);
       //*Hacer consulta mutation
       const updateAvatarResponse = await updateAvatar({
@@ -42,7 +40,6 @@ export default function AvatarForm(props) {
         },
       });
 
-      //   console.log(updateAvatarResponse);
       if (!updateAvatarResponse.data.updateAvatar.status) {
         toast.warning("Error al cargar el avatar");
         setLoading(false);

@@ -10,6 +10,8 @@ import { GETCOMMENTS } from "../../../../gql/comment";
 
 import { map } from "lodash";
 
+import ImageNotFound from "../../../../assets/avatar.png";
+
 function Comments(props) {
   const { publicationId } = props;
 
@@ -31,7 +33,7 @@ function Comments(props) {
     <div className="comments">
       {map(getComments, (comment, index) => (
         <Link key={index} to={`/${comment.idUser.username}`} className="comment">
-          <Image src={comment.idUser.avatar} avatar />
+          <Image src={comment.idUser.avatar || ImageNotFound} avatar />
           <div>
             <p>{comment.idUser.username}</p>
             <p>{comment.comment}</p>

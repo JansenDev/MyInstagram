@@ -34,7 +34,6 @@ export default function Profile(props) {
   if (loading) return null;
   if (error) return <UserNotFound />;
   const { getUser } = data;
-  // console.log(getUser);
   // *handlerModal
   const handlerModal = (type) => {
     switch (type) {
