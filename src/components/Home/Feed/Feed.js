@@ -20,7 +20,6 @@ function Feed() {
 
   if (loading) return null;
   const { getPostsFolloweds: postsFollowedsList } = data;
-  console.log(postsFollowedsList);
   const onPublication = (post) => {
     setPublication(post);
     setShow(true);

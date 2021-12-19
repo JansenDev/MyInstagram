@@ -14,7 +14,6 @@ function NotFolloweds() {
   const { data, loading } = useQuery(GET_NOT_FOLLOWEDS);
 
   if (loading) return null;
-  console.log(data);
   const { getNotFolloweds: NotFollowedsList } = data;
   return (
     <div className="users-not-followeds">

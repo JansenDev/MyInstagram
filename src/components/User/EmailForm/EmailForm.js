@@ -21,7 +21,7 @@ function EmailForm(props) {
       //   },
       // });
 
-      //! Actualiza la caché
+      //! Actualizar la caché
       //! NOTA: No es necesario consultar la query cache para actualizar la misma
       cacheMemory.writeQuery({
         query: GET_USER,
@@ -35,7 +35,7 @@ function EmailForm(props) {
           },
         },
       });
-      
+
     },
   });
   const formik = useFormik({
