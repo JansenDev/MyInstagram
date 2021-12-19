@@ -4,7 +4,7 @@ import "./ModalBasic.scss";
 
 export default function ModalBasic(props) {
     const {show, setShow, title, children} = props;
-    // console.log(props);
+
     const onClose= ()=>{
         setShow(false);
     };

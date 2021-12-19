@@ -4,7 +4,7 @@ import { Search, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { SEARCH_USERS } from "../../../gql/user";
-import { size, forEach } from "lodash";
+import { size } from "lodash";
 import ImageNotFound from "../../../assets/avatar.png";
 
 function SearchBar() {

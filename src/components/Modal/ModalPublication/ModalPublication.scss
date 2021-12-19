@@ -1,0 +1,31 @@
+@import "../../../scss/index.scss";
+
+.modal-publication {
+  // height: 560px !important;
+  .ui.grid {
+    margin: 0;
+    height: 100%;
+  }
+
+  &__left {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &.__right {
+    padding: 0 !important ;
+    margin: 0 !important;
+    // height: 700px !important;
+    // margin-bottom: 10px !important;
+    div>i{
+      position: absolute !important;
+      bottom: 0 !important;
+      border: 1px solid red !important;
+      color: red !important;
+    }
+
+  }
+
+
+}

@@ -1,0 +1,29 @@
+@import "../../../../scss/index.scss";
+.like {
+  padding: 0 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px !important;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  i {
+    font-size: 16px !important;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &.active {
+    color: $danger;
+  }
+}
+
+.actions-container {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+}

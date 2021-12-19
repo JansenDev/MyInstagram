@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import useAuth from "../../../hooks/useAuth";
 import "./Profile.scss";
+import React, { useState } from "react";
+
 import { Grid, Image } from "semantic-ui-react";
 
+import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../gql/user";
 import ImageNotFound from "../../../assets/avatar.png";
@@ -12,9 +13,10 @@ import ModalBasic from "../../Modal/ModalBasic";
 import AvatarForm from "../AvatarForm/AvatarForm";
 import HeaderProfile from "./HeaderProfile";
 import SettingsForm from "../SettingsForm";
+import Followers from "./Followers";
 
 export default function Profile(props) {
-  const { username } = props;
+  const { username, totalPublicationsFetch } = props;
 
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
@@ -33,6 +35,7 @@ export default function Profile(props) {
   if (error) return <UserNotFound />;
   const { getUser } = data;
   // console.log(getUser);
+  // *handlerModal
   const handlerModal = (type) => {
     switch (type) {
       case "avatar":
@@ -53,6 +56,7 @@ export default function Profile(props) {
           />
         );
         setShowModal(true);
+
       default:
         break;
     }
@@ -77,7 +81,15 @@ export default function Profile(props) {
             auth={auth}
             handlerModal={handlerModal}
           />
-          <div>Followers</div>
+
+          <div>
+            <Followers
+              username={username}
+              handlerModal={handlerModal}
+              totalPublicationsFetch={totalPublicationsFetch}
+            />
+          </div>
+
           <div className="other">
             <p className="name">{getUser.name}</p>
 

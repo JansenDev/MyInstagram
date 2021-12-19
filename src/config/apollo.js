@@ -8,7 +8,8 @@ import { getToken } from "../utils/token";
 
 //* Crear un link de tipo HttpLink
 const httplink = createUploadLink({
-    uri:"http://localhost:4000",
+    // uri:"http://localhost:4000",
+    uri:"https://instagramjhonatan.herokuapp.com",
 });
 
 //*Envia el context(headers) al servidor

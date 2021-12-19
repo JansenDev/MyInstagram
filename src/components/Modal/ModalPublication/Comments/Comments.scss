@@ -1,0 +1,60 @@
+@import "../../../../scss/index.scss";
+
+.comments {
+  max-height: 660px !important;
+  overflow-y: scroll;
+
+  .comment {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid $border-grey;
+    color: $font-dark;
+
+    img {
+      margin-right: 15px !important;
+    }
+
+    p {
+      margin: 0%;
+
+      &:first-of-type {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .comments {
+    max-height: 610px !important;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 970px) {
+  .comments {
+    max-height: 610px !important;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .comments {
+    max-height: 500px !important;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .comments {
+    max-height: 400px !important;
+  }
+}
+
+@media only screen and (max-width: 643px) {
+  .comments {
+    max-height: 350px !important;
+  }
+}
+
