@@ -93,7 +93,7 @@ export default function Profile(props) {
             <p className="name">{getUser.name}</p>
 
             {getUser.siteweb && (
-              <a href={getUser.siteweb} target="__blank" className="siteWeb">
+              <a target="__blank" href={getUser.siteweb}  className="siteWeb">
                 {getUser.siteweb}
               </a>
             )}
