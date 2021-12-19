@@ -1,2 +1,2 @@
-# Link Instagram Jhonatan clone
+# Link Instagram-Jhonatan clone
 https://instagramjhonatan.netlify.app
